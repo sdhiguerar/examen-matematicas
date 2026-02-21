@@ -34,8 +34,11 @@ codigo = st.text_input("Código")
 
 if nombre and codigo:
 
-    # Semilla única
-    semilla = hash(nombre + codigo)
+    import hashlib
+    
+    texto = nombre + codigo
+    semilla = int(hashlib.sha256(texto.encode()).hexdigest(), 16) % (10**8)
+
     random.seed(semilla)
 
     st.subheader("Examen")
